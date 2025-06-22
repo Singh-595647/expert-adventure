@@ -4,6 +4,7 @@ on:
   schedule:
     # Runs every day at 10:00 AM UTC (3:30 PM IST)
     - cron: '0 10 * * *'
+  workflow_dispatch:  # Optional: lets you run the workflow manually
 
 jobs:
   commit-job:
@@ -19,5 +20,5 @@ jobs:
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "23f2003771@ds.study.iitm.ac.in"
           git add daily_log.txt
-          git commit -m "Daily commit on $(date -u)"
+          git commit -m "Daily commit on $(date -u)" || echo "No changes to commit"
           git push
