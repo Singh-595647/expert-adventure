@@ -2,7 +2,7 @@ name: Daily Commit Workflow
 
 on:
   schedule:
-    - cron: '0 10 * * *'  # Runs daily at 10:00 AM UTC (3:30 PM IST)
+    - cron: '0 10 * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,8 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout with PAT access
         uses: actions/checkout@v4
+        with:
+          # This replaces the default GITHUB_TOKEN with your PAT
+          repository: ${{ github.repository }}
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Make a daily commit by 23f2003771@ds.study.iitm.ac.in
         run: |
@@ -20,5 +24,4 @@ jobs:
           git config --global user.email "singh.595647@gmail.com"
           git add daily_log.txt
           git commit -m "Daily commit on $(date -u)" || echo "No changes to commit"
-          git remote set-url origin https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }}
           git push
