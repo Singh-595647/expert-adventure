@@ -15,11 +15,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Make a daily commit by 23f2003771@ds.study.iitm.ac.in
+      - name: Make a daily commit by Singh_Shikhar
         run: |
           echo "Daily update at $(date -u)" >> daily_log.txt
           git config --global user.name "GitHub Action Bot"
-          git config --global user.email "23f2003771@ds.study.iitm.ac.in"
+          git config --global user.email "singh.595647@gmail.com"
           git add daily_log.txt
           git commit -m "Daily commit on $(date -u)" || echo "No changes to commit"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
